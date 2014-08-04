@@ -59,6 +59,11 @@ class ToDoApp < Sinatra::Application
     redirect "/"
   end
 
+  get "/todos/:id" do
+    todos = ToDoItem.find_by(id: params[:id])
+    erb :edit, locals: {todos: todos}
+  end
+
   post "/todos" do
     ToDoItem.create(body: params[:body])
 
@@ -66,6 +71,24 @@ class ToDoApp < Sinatra::Application
 
     redirect "/"
   end
+
+  patch "/todos/:id" do
+    ToDoItem.find_by(id: session[:user_id]).update(:body => params[:body])
+    flash[:notice] = "Todo Updated"
+    redirect "/"
+  end
+
+  delete "/todos/:id" do
+    ToDoItem.find_by(id: session[:user_id]).delete
+
+    flash[:notice] = "Todo Completed"
+    redirect "/"
+
+  end
+
+
+
+
 
   private
 

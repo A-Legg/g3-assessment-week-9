@@ -1,0 +1,12 @@
+<form action="/todos/<%= todos["id"] %>" method="post">
+  <input type="hidden" name="_method" value="patch"/>
+  <label for="message">Edit ToDo:</label>
+  <input type="text" name="message" id="message" value="<%= todos["body"] %>"/>
+
+  <input type="submit" value="Update ToDo"/>
+</form>
+
+<form method="post" action="/todos/<%= todos["id"] %>" method="delete">
+  <input type="hidden" name="_method" value="delete"/>
+  <input type="submit" value="Complete ToDo"/>
+</form>
